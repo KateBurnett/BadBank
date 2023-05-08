@@ -1,10 +1,11 @@
 function Spa() {
+  //const [email, setEmail]   = React.useState('');
 
   return (
     <HashRouter>
       <div>
         <NavBar/>        
-        {/* <UserContext.Provider value={{users:[{name:'kate',email:'kate@mit.edu',password:'password',balance:100}]}}> */}
+        <UserContext.Provider value={{users:[{name:'kate',email:'kate@mit.edu',password:'password',balance:100}]}}>
           <div className="container" style={{padding: "20px"}}>
             <Route path="/" exact component={Home} />
             <Route path="/CreateAccount/" component={CreateAccount} />
@@ -15,7 +16,7 @@ function Spa() {
             <Route path="/balance/" component={Balance} />
             {/* <Route path="/alldata/" component={AllData} /> */}
           </div>
-        {/* </UserContext.Provider> */}
+        </UserContext.Provider>
       </div>
     </HashRouter>
   );
