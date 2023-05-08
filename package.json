@@ -4,7 +4,8 @@
   "description": "lowdb sample for 1.125",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node index.js"
   },
   "author": "abel@mit.edu",
   "license": "MIT",
@@ -12,6 +13,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "lowdb": "^1.0.0",
-    "mongodb": "^3.6.2"
+    "mongodb": "^3.6.2",
+    "react": "^18.2.0",
+    "scripts": "^0.1.0"
   }
 }
