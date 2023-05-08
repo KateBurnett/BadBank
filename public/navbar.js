@@ -28,7 +28,7 @@ function NavBar(){
           </li>           */}
         </ul>
       </div>
-      <a className="navbar-brand" href="#">Name</a>
+      <a className="navbar-brand">Name</a>
     </nav>
 
   );
