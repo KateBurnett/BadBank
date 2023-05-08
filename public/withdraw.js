@@ -14,7 +14,8 @@ function Withdraw(){
   )
 }
 
-function WithdrawMsg(props){
+function WithdrawMsg(amount, props){
+  if (amount < props.balance){
   return(<>
     <h5>Success</h5>
     <button type="submit" 
@@ -26,6 +27,18 @@ function WithdrawMsg(props){
         Withdraw again
     </button>
   </>);
+  } else {<>
+    <h5>Cannot withdraw more than balance</h5>
+    <button type="submit" 
+      className="btn btn-light" 
+      onClick={() => {
+        props.setShow(true);
+        props.setStatus('');
+      }}>
+        Withdraw new amount
+    </button>
+    </>
+  }
 }
 
 function WithdrawForm(props){
@@ -68,7 +81,7 @@ function WithdrawForm(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={handle}>
-        Withdraw
+        Withdraw 
     </button>
 
   </>);

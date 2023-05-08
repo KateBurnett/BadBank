@@ -4,6 +4,8 @@ var cors    = require('cors');
 var dal     = require('./dal.js');
 const e = require('express');
 
+
+
 // used to serve static files from public directory
 app.use(express.static('public'));
 app.use(cors());
@@ -17,8 +19,8 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
 
             // if user exists, return error message
             if(users.length > 0){
-                console.log('User already in exists');
-                res.send('User already in exists');    
+                console.log('User already exists');
+                res.send('User already exists. Please try logging in.');    
             }
             else{
                 // else create user
