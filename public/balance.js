@@ -39,6 +39,7 @@ function BalanceForm(props){
     .then(text => {
         try {
             const data = JSON.parse(text);
+            console.log(data.balance);
             props.setStatus(text);
             props.setShow(false);
             setBalance(user.balance);

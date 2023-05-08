@@ -1,3 +1,5 @@
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');    
@@ -9,7 +11,8 @@ function Login(){
       status={status}
       body={show ? 
         <LoginForm setShow={setShow} setStatus={setStatus}/> :
-        <LoginMsg setShow={setShow} setStatus={setStatus}/>}
+        <LoginMsg setShow={setShow} setStatus={setStatus}/>
+      }
     />
   ) 
 }
@@ -45,6 +48,10 @@ function LoginForm(props){
     });
   }
 
+  function nav(){
+    window.location.href = "#/CreateAccount/";
+    };
+
 
   return (<>
 
@@ -62,7 +69,10 @@ function LoginForm(props){
       value={password} 
       onChange={e => setPassword(e.currentTarget.value)}/><br/>
 
-    <button type="submit" className="btn btn-light" onClick={handle}>Login</button>
+    <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button>
+    <br></br>
+    <br></br>
+    <button type="submit" className="btn btn-light btn-sm" onClick={nav}>Create an account</button>
    
   </>);
 }
