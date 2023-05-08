@@ -7,7 +7,7 @@ function Login(){
   return (
     <Card
       bgcolor="secondary"
-      header="Login"
+      header="Login / Logout"
       status={status}
       body={show ? 
         <LoginForm setShow={setShow} setStatus={setStatus}/> :
@@ -23,7 +23,7 @@ function LoginMsg(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>
-        Authenticate again
+        Log out
     </button>
   </>);
 }
