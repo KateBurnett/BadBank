@@ -14,8 +14,7 @@ function Withdraw(){
   )
 }
 
-function WithdrawMsg(amount, props){
-  if (amount < props.balance){
+function WithdrawMsg(props){
   return(<>
     <h5>Success</h5>
     <button type="submit" 
@@ -27,19 +26,34 @@ function WithdrawMsg(amount, props){
         Withdraw again
     </button>
   </>);
-  } else {<>
-    <h5>Cannot withdraw more than balance</h5>
-    <button type="submit" 
-      className="btn btn-light" 
-      onClick={() => {
-        props.setShow(true);
-        props.setStatus('');
-      }}>
-        Withdraw new amount
-    </button>
-    </>
-  }
 }
+
+// function WithdrawMsg(amount, props){
+//   if (amount < props.balance){
+//   return(<>
+//     <h5>Success</h5>
+//     <button type="submit" 
+//       className="btn btn-light" 
+//       onClick={() => {
+//         props.setShow(true);
+//         props.setStatus('');
+//       }}>
+//         Withdraw again
+//     </button>
+//   </>);
+//   } else {<>
+//     <h5>Cannot withdraw more than balance</h5>
+//     <button type="submit" 
+//       className="btn btn-light" 
+//       onClick={() => {
+//         props.setShow(true);
+//         props.setStatus('');
+//       }}>
+//         Withdraw new amount
+//     </button>
+//     </>
+//   }
+// }
 
 function WithdrawForm(props){
   const [email, setEmail]   = React.useState('');
@@ -81,7 +95,7 @@ function WithdrawForm(props){
     <button type="submit" 
       className="btn btn-light" 
       onClick={handle}>
-        Withdraw 
+        Withdraw
     </button>
 
   </>);
