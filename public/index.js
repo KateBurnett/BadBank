@@ -1,5 +1,6 @@
 function Spa() {
-  const [email, setEmail]   = React.useState('CHECKING');
+  const [email, setEmail]   = React.useState('');
+  const [loggedIn,setLoggedIn] = React.useState(false)
 
   return (
     <HashRouter>
@@ -7,14 +8,13 @@ function Spa() {
         <NavBar/>        
         <UserContext.Provider value={{users:[{name:'kate',email:'kate@mit.edu',password:'password',balance:100}]}}>
           <div className="container" style={{padding: "20px"}}>
-           
+            <Route path="/" exact component={() => (<Home email={email}/>)} />          
             <Route path="/CreateAccount/" component={CreateAccount} />
-            <Route path="/login/" component={Login} />
-            <Route path="/deposit/" element={<Deposit email={email}/>} />
-            <Route path="/withdraw/" component={Withdraw} />
+            <Route path="/login/" component={() => (<Login email={email} setEmail={setEmail} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>)} />
+            <Route path="/deposit/" component={() => (<Deposit email={email}/>)}/>
+            <Route path="/withdraw/" component={() => (<Withdraw email={email}/>)} />
+            <Route path="/balance/" component={() => (<Balance email={email}/>)} />
             {/* <Route path="/transactions/" component={Transactions} /> */}
-            <Route path="/balance/" component={Balance} />
-            <Route path="/" exact component={() => (<Home email={email}/>)} />
             {/* <Route path="/alldata/" component={AllData} /> */}
           </div>
         </UserContext.Provider>

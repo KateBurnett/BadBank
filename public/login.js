@@ -41,6 +41,7 @@ function LoginForm(props){
             props.setStatus('');
             props.setShow(false);
             console.log('JSON:', data);
+            console.log('Email', data.email);
         } catch(err) {
             props.setStatus(text)
             console.log('err:', text);
