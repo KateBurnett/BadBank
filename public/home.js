@@ -1,4 +1,7 @@
-function Home(){
+function Home(props){
+  console.log("props-----------+++++++++")
+  console.log(props)
+  console.log("props===========")
   return (
     <Card
       txtcolor="black"

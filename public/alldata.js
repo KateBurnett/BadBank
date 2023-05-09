@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 function AllData(){
     const [data, setData] = React.useState('');    
 

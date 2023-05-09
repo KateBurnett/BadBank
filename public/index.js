@@ -1,5 +1,5 @@
 function Spa() {
-  //const [email, setEmail]   = React.useState('');
+  const [email, setEmail]   = React.useState('CHECKING');
 
   return (
     <HashRouter>
@@ -7,13 +7,14 @@ function Spa() {
         <NavBar/>        
         <UserContext.Provider value={{users:[{name:'kate',email:'kate@mit.edu',password:'password',balance:100}]}}>
           <div className="container" style={{padding: "20px"}}>
-            <Route path="/" exact component={Home} />
+           
             <Route path="/CreateAccount/" component={CreateAccount} />
             <Route path="/login/" component={Login} />
-            <Route path="/deposit/" component={Deposit} />
+            <Route path="/deposit/" element={<Deposit email={email}/>} />
             <Route path="/withdraw/" component={Withdraw} />
             {/* <Route path="/transactions/" component={Transactions} /> */}
             <Route path="/balance/" component={Balance} />
+            <Route path="/" exact component={() => (<Home email={email}/>)} />
             {/* <Route path="/alldata/" component={AllData} /> */}
           </div>
         </UserContext.Provider>
@@ -22,7 +23,12 @@ function Spa() {
   );
 }
 
-ReactDOM.render(
-  <Spa/>,
-  document.getElementById('root')
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <Spa/>
 );
+
+// ReactDOM.render(
+//   <Spa/>,
+//   document.getElementById('root')
+// );
