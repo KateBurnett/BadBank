@@ -35,7 +35,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true }, function (err, client) {
     console.log("Connected successfully to db server");
 
     // connect to myproject database
-    const db = client.db('BankingCluster');
+    const db = client.db('users');
 });
 
 // async function run(){
