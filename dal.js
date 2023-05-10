@@ -1,6 +1,7 @@
-const MongoClient = require('mongodb').MongoClient;
-const url = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
-let db = null;
+const MongoClient = require('mongodb');
+//.MongoClient;
+// const url = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
+// let db = null;
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
@@ -29,15 +30,38 @@ let db = null;
 // run().catch(console.dir);
 
 
-// connect to mongo
-MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
-    console.log("Connected successfully to db server");
+// // connect to mongo
+// MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
+//     console.log("Connected successfully to db server");
 
-    // connect to myproject database
-    db = client.db('myproject');
-});
+//     // connect to myproject database
+//     db = client.db('myproject');
+// });
 
+async function main(){
+    /**
+     * Connection URI.
+     */
+    const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
+ 
 
+    const client = new MongoClient(uri);
+ 
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        // Make the appropriate DB calls
+        await  listDatabases(client);
+ 
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+}
+
+main().catch(console.error);
 
 
 // create user account using the collection.insertOne function
