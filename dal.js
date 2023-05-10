@@ -1,9 +1,9 @@
-const MongoClient = require('mongodb');
+//const MongoClient = require('mongodb');
 //.MongoClient;
 // const url = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
 // let db = null;
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
 
 // // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -30,35 +30,35 @@ const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://loc
 // run().catch(console.dir);
 
 
-// // connect to mongo
-// MongoClient.connect(uri, { useUnifiedTopology: true }, function (err, client) {
-//     console.log("Connected successfully to db server");
+// connect to mongo
+MongoClient.connect(uri, { useUnifiedTopology: true }, function (err, client) {
+    console.log("Connected successfully to db server");
 
-//     // connect to myproject database
-//     const db = client.db('myproject');
-// });
+    // connect to myproject database
+    const db = client.db('BankingCluster');
+});
 
-async function run(){
-    /**
-     * Connection URI.
-     */
-    const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
+// async function run(){
+//     /**
+//      * Connection URI.
+//      */
+//     const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
  
-    const client = new MongoClient(uri);
+//     const client = new MongoClient(uri);
  
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
+//     try {
+//         // Connect to the MongoDB cluster
+//         await client.connect();
  
-        // Make the appropriate DB calls
-        //await  listDatabases(client);
+//         // Make the appropriate DB calls
+//         //await  listDatabases(client);
  
-    } catch (e) {
-        console.error(e);
-    }
-}
+//     } catch (e) {
+//         console.error(e);
+//     }
+// }
 
-run().catch(console.error);
+// run().catch(console.error);
 
 
 // create user account using the collection.insertOne function
