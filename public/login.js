@@ -2,8 +2,7 @@
 
 function Login(){
   const [show, setShow]     = React.useState(true);
-  const [status, setStatus] = React.useState('');  
-  const [loggedIn, setloggedIn] = React.useState(true);  
+  const [status, setStatus] = React.useState('');   
 
   return (
     <Card
@@ -40,7 +39,6 @@ function LoginForm(props){
             const data = JSON.parse(text);
             props.setStatus('');
             props.setShow(false);
-            //props.setLoggedIn(true);
             console.log('JSON:', data);
             console.log('Email', data.email);
         } catch(err) {
