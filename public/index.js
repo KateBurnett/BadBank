@@ -9,7 +9,7 @@ function Spa() {
           <div className="container" style={{padding: "20px"}}>
             <Route path="/" exact component={() => (<Home email={email}/>)} />          
             <Route path="/CreateAccount/" component={CreateAccount} />
-            <Route path="/login/" component={() => (<Login email={email} setEmail={setEmail} loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>)} />
+            <Route path="/login/" component={() => (<Login email={email} setEmail={setEmail}/>)} />
             <Route path="/deposit/" component={() => (<Deposit email={email}/>)}/>
             <Route path="/withdraw/" component={() => (<Withdraw email={email}/>)} />
             <Route path="/balance/" component={() => (<Balance email={email}/>)} />
