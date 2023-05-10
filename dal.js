@@ -31,7 +31,7 @@ const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://loc
 
 
 // connect to mongo
-MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
+MongoClient.connect(uri, { useUnifiedTopology: true }, function (err, client) {
     console.log("Connected successfully to db server");
 
     // connect to myproject database
