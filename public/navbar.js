@@ -13,6 +13,9 @@ function NavBar(props){
             <a className="nav-link" href="#/login/">Login</a>
           </li>
           <li className="nav-item">
+            <a className="nav-link" href="#/CreateAccount/">Create Account</a>
+          </li>
+          <li className="nav-item">
             <a className="nav-link" href="#/deposit/">Deposit</a>
           </li>
           <li className="nav-item">
@@ -24,9 +27,6 @@ function NavBar(props){
           {/* <li className="nav-item">
             <a className="nav-link" href="#/alldata/">AllData</a>
           </li>           */}
-          {/* <li className="nav-item">
-            <a className="nav-link" href="#/CreateAccount/">Create Account</a>
-          </li> */}
         </ul>
       </div>
       <a className="navbar-brand">{props.email}</a>

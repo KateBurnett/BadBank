@@ -1,8 +1,9 @@
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+{/* <script src="https://apis.google.com/js/platform.js" async defer></script> */}
 
 function Login(){
   const [show, setShow]     = React.useState(true);
-  const [status, setStatus] = React.useState('');    
+  const [status, setStatus] = React.useState('');  
+  const [loggedIn, setloggedIn] = React.useState(true);  
 
   return (
     <Card
@@ -10,8 +11,8 @@ function Login(){
       header="Login / Logout"
       status={status}
       body={show ? 
-        <LoginForm setShow={setShow} setStatus={setStatus}/> :
-        <LoginMsg setShow={setShow} setStatus={setStatus}/>
+        <LoginForm setShow={setShow} setStatus={setStatus} /> :
+        <LoginMsg setShow={setShow} setStatus={setStatus} />
       }
     />
   ) 
@@ -25,8 +26,7 @@ function LoginMsg(props){
       onClick={() => props.setShow(true)}>
         Log out
     </button>
-  </>);
-}
+  </>)}
 
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
@@ -40,10 +40,11 @@ function LoginForm(props){
             const data = JSON.parse(text);
             props.setStatus('');
             props.setShow(false);
+            //props.setLoggedIn(true);
             console.log('JSON:', data);
             console.log('Email', data.email);
         } catch(err) {
-            props.setStatus(text)
+            props.setStatus("User does not exist. Please create an account.")
             console.log('err:', text);
         }
     });
@@ -71,9 +72,5 @@ function LoginForm(props){
       onChange={e => setPassword(e.currentTarget.value)}/><br/>
 
     <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button>
-    <br></br>
-    <br></br>
-    <button type="submit" className="btn btn-light btn-sm" onClick={nav}>Create an account</button>
-   
   </>);
 }

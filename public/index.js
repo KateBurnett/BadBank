@@ -15,7 +15,7 @@ function Spa() {
             <Route path="/withdraw/" component={() => (<Withdraw email={email}/>)} />
             <Route path="/balance/" component={() => (<Balance email={email}/>)} />
             {/* <Route path="/transactions/" component={Transactions} /> */}
-            {/* <Route path="/alldata/" component={AllData} /> */}
+            <Route path="/alldata/" component={AllData} />
           </div>
         </UserContext.Provider>
       </div>
