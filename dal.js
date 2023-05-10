@@ -2,12 +2,11 @@
 // const url = process.env.MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
 // let db = null;
 
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://catherineburnett18:<password>@bankingcluster.kehcwyj.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.meta.env.REACT_APP_MONGO_URI;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
+const client = new MongoClient(uri, { useUnifiedTopology: true }, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
