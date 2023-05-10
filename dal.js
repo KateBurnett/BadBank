@@ -1,18 +1,18 @@
-// const MongoClient = require('mongodb').MongoClient;
-// const url = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
-// //let db = null;
+const MongoClient = require('mongodb').MongoClient;
+const url = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
+let db = null;
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, { useUnifiedTopology: true }, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// const client = new MongoClient(uri, { useUnifiedTopology: true }, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   }
+// });
 
 // async function run() {
 //   try {
