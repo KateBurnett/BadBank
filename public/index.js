@@ -1,6 +1,5 @@
 function Spa() {
   const [email, setEmail]   = React.useState('');
-  const [loggedIn,setLoggedIn] = React.useState(false)
 
   return (
     <HashRouter>
