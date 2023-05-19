@@ -1,6 +1,5 @@
-{/* <script src="https://apis.google.com/js/platform.js" async defer></script> */}
-
-function Login(){
+function Login(props){
+  console.log(props.email);
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
 
@@ -19,7 +18,8 @@ function Login(){
 
 function LoginMsg(props){
   return(<>
-    <h5>Success</h5>
+    <h5>Success: {props.email}</h5>
+    <h6>{email}</h6>
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => props.setShow(true)}>
