@@ -1,23 +1,27 @@
-function Balance(){
+function Balance(props){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
+  const [balance, setBalance] = React.useState('');
+  console.log('Email In Balance: ' + props.email);  
+  console.log('Balance In Balance: ' + balance);  
 
   return (
     <Card
       bgcolor="info"
       header="Balance"
-      status={status}
+      status={status} 
       body={show ?
-        <BalanceForm setShow={setShow} setStatus={setStatus}/> :
-        <BalanceMsg setShow={setShow} setStatus={setStatus}/>}
+        <BalanceForm setShow={setShow} setStatus={setStatus} email={props.email} setBalance={setBalance}/> :
+        <BalanceMsg setShow={setShow} setStatus={setStatus} email={props.email} balance={balance}/>}
     />
   )
 
 }
 
 function BalanceMsg(props){
+  console.log('Balance In BalanceMsg: ' + props.balance)
   return(<>
-    <h5>Success</h5>
+    <h5>Balance: ${props.balance}</h5>
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => {
@@ -30,35 +34,35 @@ function BalanceMsg(props){
 }
 
 function BalanceForm(props){
-  const [email, setEmail]   = React.useState('');
-  const [balance, setBalance] = React.useState('');  
-
+  console.log('---------------------')
+  console.log(props.email)
+  console.log('---------------------')
   function handle(){
-    fetch(`/account/findOne/${email}`)
+    fetch(`/account/findOne/${props.email}`)
     .then(response => response.text())
     .then(text => {
         try {
             const data = JSON.parse(text);
-            console.log(data.balance);
-            props.setStatus(text);
+            console.log('BalanceForm fetch: ' + data.balance);
+            //props.setStatus(text);
             props.setShow(false);
-            setBalance(user.balance);
             console.log('JSON:', data);
+            props.setBalance(data.balance);
         } catch(err) {
-            props.setStatus(text)
+            //props.setStatus(text)
+            props.setStatus("Balance check failed. Please make sure you are logged in.")
             console.log('err:', text);
         }
     });
   }
 
   return (<>
-
-    Email<br/>
+    {/* Email<br/>
     <input type="input" 
       className="form-control" 
       placeholder="Enter email" 
-      value={email} 
-      onChange={e => setEmail(e.currentTarget.value)}/><br/>
+      value={props.email} 
+      onChange={e => setEmail(e.currentTarget.value)}/><br/> */}
 
     <button type="submit" 
       className="btn btn-light" 

@@ -1,7 +1,9 @@
+// working but rerenders the SPA when anything is entered in email input. Add new set state and set equal to props.setEmail?
+
 function Login(props){
-  console.log(props.email);
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
+  const [password, setPassword] = React.useState('');
 
   return (
     <Card
@@ -9,8 +11,8 @@ function Login(props){
       header="Login / Logout"
       status={status}
       body={show ? 
-        <LoginForm setShow={setShow} setStatus={setStatus} /> :
-        <LoginMsg setShow={setShow} setStatus={setStatus} />
+        <LoginForm setShow={setShow} setStatus={setStatus} setEmail={props.setEmail} email={props.email} setPassword={setPassword} password={password}/> :
+        <LoginMsg setShow={setShow} setStatus={setStatus} email={props.email} setEmail={props.setEmail}/>
       }
     />
   ) 
@@ -18,27 +20,29 @@ function Login(props){
 
 function LoginMsg(props){
   return(<>
-    <h5>Success: {props.email}</h5>
-    <h6>{email}</h6>
+    <h5>Success! Logged in as {props.email}</h5>
     <button type="submit" 
       className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
+      onClick={() => {
+        props.setShow(true); 
+        props.setEmail('')
+      }
+      }>
         Log out
     </button>
   </>)}
 
 function LoginForm(props){
-  const [email, setEmail]       = React.useState('');
-  const [password, setPassword] = React.useState('');
 
   function handle(){
-    fetch(`/account/login/${email}/${password}`)
+    fetch(`/account/login/${props.email}/${props.password}`)
     .then(response => response.text())
     .then(text => {
         try {
             const data = JSON.parse(text);
             props.setStatus('');
             props.setShow(false);
+            props.setEmail(data.email)
             console.log('JSON:', data);
             console.log('Email', data.email);
         } catch(err) {
@@ -48,26 +52,21 @@ function LoginForm(props){
     });
   }
 
-  function nav(){
-    window.location.href = "#/CreateAccount/";
-    };
-
-
   return (<>
 
     Email<br/>
     <input type="input" 
       className="form-control" 
       placeholder="Enter email" 
-      value={email} 
-      onChange={e => setEmail(e.currentTarget.value)}/><br/>
+      value={props.email} 
+      onChange={e => props.setEmail(e.currentTarget.value)}/><br/>
 
     Password<br/>
     <input type="password" 
       className="form-control" 
       placeholder="Enter password" 
-      value={password} 
-      onChange={e => setPassword(e.currentTarget.value)}/><br/>
+      value={props.password} 
+      onChange={e => props.setPassword(e.currentTarget.value)}/><br/>
 
     <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button>
   </>);

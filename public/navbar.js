@@ -1,6 +1,5 @@
+
 function NavBar(props){
-  console.log(props);
-  console.log(props.email);
   return(
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">Free Money Bank</a>

@@ -1,6 +1,7 @@
-function CreateAccount(){
+function CreateAccount(props){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');
+  console.log('Email In CreateAccount: ' + props.email)
 
   return (
     <Card
@@ -8,8 +9,8 @@ function CreateAccount(){
       header="Create Account"
       status={status}
       body={show ? 
-        <CreateForm setShow={setShow}/> : 
-        <CreateMsg setShow={setShow}/>}
+        <CreateForm setShow={setShow} setEmail={props.setEmail} email={props.email}/> : 
+        <CreateMsg setShow={setShow} setEmail={props.setEmail}/>}
     />
   )
 }
@@ -19,11 +20,14 @@ function CreateMsg(props){
     <h5>Success! Welcome to Free Money Bank. Please log into your account</h5>
     <button type="submit" 
       className="btn btn-light" 
-      onClick={nav}>Login</button>
+      onClick={() => {
+        props.setShow(true); 
+        props.setEmail('')
+      }}>Log Out</button>
   </>)};
 
 function nav(){
-  window.location.href = "#/Login/";
+  window.location.href = "#/CreateAccount/";
   };
 
 function ValidateEmail(email) 
@@ -37,16 +41,15 @@ function ValidateEmail(email)
 
 function CreateForm(props){
   const [name, setName]         = React.useState('');
-  const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
 
   function handle(){
-    console.log(name,email,password);
+    console.log(name,props.email,password);
     if (name.length < 1) {
       alert("You must enter a name.");
       return
     }
-    if (ValidateEmail(email) === false) {
+    if (ValidateEmail(props.email) === false) {
       alert("Please enter a valid email.");
       return
     }
@@ -55,7 +58,7 @@ function CreateForm(props){
       return
     }
     else {
-    const url = `/account/create/${name}/${email}/${password}`;
+    const url = `/account/create/${name}/${props.email}/${password}`;
     (async () => {
         var res  = await fetch(url);
         var data = await res.json();    
@@ -78,8 +81,8 @@ function CreateForm(props){
     <input type="input" 
       className="form-control" 
       placeholder="Enter email" 
-      value={email} 
-      onChange={e => setEmail(e.currentTarget.value)}/><br/>
+      value={props.email} 
+      onChange={e => props.setEmail(e.currentTarget.value)}/><br/>
 
     Password<br/>
     <input type="password" 

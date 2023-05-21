@@ -1,6 +1,7 @@
-function Withdraw(){
+function Withdraw(props){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
+  const [amount, setAmount] = React.useState('');
 
   return (
     <Card
@@ -8,7 +9,7 @@ function Withdraw(){
       header="Withdraw"
       status={status}
       body={show ? 
-        <WithdrawForm setShow={setShow} setStatus={setStatus}/> :
+        <WithdrawForm setShow={setShow} setStatus={setStatus} email={props.email} amount={amount} setAmount={setAmount}/> :
         <WithdrawMsg setShow={setShow} setStatus={setStatus}/>}
     />
   )
@@ -21,7 +22,7 @@ function WithdrawMsg(props){
       className="btn btn-light" 
       onClick={() => {
         props.setShow(true);
-        props.setStatus('');
+        //props.setStatus('');
       }}>
         Withdraw again
     </button>
@@ -56,20 +57,18 @@ function WithdrawMsg(props){
 // }
 
 function WithdrawForm(props){
-  const [email, setEmail]   = React.useState('');
-  const [amount, setAmount] = React.useState('');
 
   function handle(){
-    fetch(`/account/update/${email}/-${amount}`)
+    fetch(`/account/update/${props.email}/-${props.amount}`)
     .then(response => response.text())
     .then(text => {
         try {
             const data = JSON.parse(text);
-            props.setStatus(JSON.stringify(data.value));
+            //props.setStatus(JSON.stringify(data.value));
             props.setShow(false);
             console.log('JSON:', data);
         } catch(err) {
-            props.setStatus('Deposit failed')
+            props.setStatus('Withdrawl failed. Please make sure you are logged in and entered an interger.')
             console.log('err:', text);
         }
     });
@@ -78,19 +77,19 @@ function WithdrawForm(props){
 
   return(<>
 
-    Email<br/>
+    {/* Email<br/>
     <input type="input" 
       className="form-control" 
       placeholder="Enter email" 
       value={email} 
-      onChange={e => setEmail(e.currentTarget.value)}/><br/>
+      onChange={e => setEmail(e.currentTarget.value)}/><br/> */}
 
     Amount<br/>
     <input type="number" 
       className="form-control" 
       placeholder="Enter amount" 
-      value={amount} 
-      onChange={e => setAmount(e.currentTarget.value)}/><br/>
+      value={props.amount} 
+      onChange={e => props.setAmount(e.currentTarget.value)}/><br/>
 
     <button type="submit" 
       className="btn btn-light" 
