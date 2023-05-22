@@ -14,8 +14,10 @@
 
 // ---------------  Mongo connection in Atlas - MongoDB Driver "Connect to BankingCluster" ----------
 // Err: "MongoNetworkError: failed to connect to server [localhost:27017] on first connect [Error: connect ECONNREFUSED 127.0.0.1:27017"
-// Err: "ReferenceError: db is not defined" in async functions with "const customers = db" - added db variable
-// Err: "MongoError: MongoClient must be connected before calling MongoClient.prototype.db"
+// Err: "ReferenceError: db is not defined" in async functions with "const customers = db" - added db variable, got following error
+// Err: "MongoError: MongoClient must be connected before calling MongoClient.prototype.db" - gave client var to run function, no change
+// All IP addresses are whitelisted
+// Updated connection uri in .env to new password
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
