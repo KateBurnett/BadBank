@@ -1,43 +1,44 @@
-// -------------  Mongo connection in starter files -----------------------------
-const MongoClient = require('mongodb').MongoClient;
-const url         = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
-let db            = null;
+// // -------------  Mongo connection in starter files -----------------------------
+// // Err: "TypeError: Cannot read properties of undefined (reading 'db')" referencing "db = client.db('myproject');"
+// const MongoClient = require('mongodb').MongoClient;
+// const url         = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
+// let db            = null;
  
-// connect to mongo
-MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
-    console.log("Connected successfully to db server");
+// // connect to mongo
+// MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
+//     console.log("Connected successfully to db server");
 
-    // connect to myproject database
-    db = client.db('myproject');
-});
-
-// // ---------------  Mongo connection in Atlas - MongoDB Driver "Connect to BankingCluster" ----------
-
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
-
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
+//     // connect to myproject database
+//     db = client.db('myproject');
 // });
 
-// async function run() {
-//   try {
-//     // Connect the client to the server	(optional starting in v4.7)
-//     await client.connect();
-//     // Send a ping to confirm a successful connection
-//     await client.db("admin").command({ ping: 1 });
-//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
+// ---------------  Mongo connection in Atlas - MongoDB Driver "Connect to BankingCluster" ----------
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 
 
