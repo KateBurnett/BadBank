@@ -2,6 +2,10 @@
   "name": "littledb",
   "version": "1.0.0",
   "description": "lowdb sample for 1.125",
+  "engines": {
+    "node": "14.17.3",
+    "npm": "6.14.13"
+  },
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -17,7 +21,8 @@
     "firebase": "^9.22.0",
     "lowdb": "^1.0.0",
     "mongodb": "^3.7.3",
-    "mongoose": "^7.1.0",
+    "mongoose": "^7.2.0",
+    "mongos": "^0.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
