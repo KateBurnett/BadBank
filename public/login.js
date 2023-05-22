@@ -1,6 +1,7 @@
 // working but rerenders the SPA when anything is entered in email input. Add new set state and set equal to props.setEmail?
 
 function Login(props){
+
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
   const [password, setPassword] = React.useState('');
@@ -11,7 +12,7 @@ function Login(props){
       header="Login / Logout"
       status={status}
       body={show ? 
-        <LoginForm setShow={setShow} setStatus={setStatus} setEmail={props.setEmail} email={props.email} setPassword={setPassword} password={password}/> :
+        <LoginForm setShow={setShow} setStatus={setStatus} setEmail={props.setEmail} email={props.email} setPassword={setPassword} password={password} auth={props.auth}/> :
         <LoginMsg setShow={setShow} setStatus={setStatus} email={props.email} setEmail={props.setEmail}/>
       }
     />
@@ -34,6 +35,23 @@ function LoginMsg(props){
 
 function LoginForm(props){
 
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyCKC0b-30an2MAuBmuJ4a0fzcVJB5E1-5s",
+  //   authDomain: "kateburnett-bankingapp.firebaseapp.com",
+  //   projectId: "kateburnett-bankingapp",
+  //   storageBucket: "kateburnett-bankingapp.appspot.com",
+  //   messagingSenderId: "757422570697",
+  //   appId: "1:757422570697:web:94bfb2e30458712769e118"
+  // };
+
+  // const app = initializeApp(firebaseConfig);
+
+  // const auth = getAuth(app);
+
+  // // TODO: initialize provider for google auth
+  // const provider = new GoogleAuthProvider();
+  
+
   function handle(){
     fetch(`/account/login/${props.email}/${props.password}`)
     .then(response => response.text())
@@ -52,6 +70,24 @@ function LoginForm(props){
     });
   }
 
+  // function googleLogin () {
+  //   console.log("google sign in clicked");
+  //   const auth = getAuth();
+  //   signInWithPopup(auth, provider)
+  //     .then((result) => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       console.log("google user: ", user);
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       console.error(error);
+  //     });
+  // };
+
   return (<>
 
     Email<br/>
@@ -68,6 +104,7 @@ function LoginForm(props){
       value={props.password} 
       onChange={e => props.setPassword(e.currentTarget.value)}/><br/>
 
-    <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button>
+    <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button><br/>
+    {/* <button type="submit" className="btn btn-warning" onClick={googleLogin}>Log in with Google</button> */}
   </>);
 }

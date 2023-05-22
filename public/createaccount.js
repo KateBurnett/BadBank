@@ -9,7 +9,7 @@ function CreateAccount(props){
       header="Create Account"
       status={status}
       body={show ? 
-        <CreateForm setShow={setShow} setEmail={props.setEmail} email={props.email}/> : 
+        <CreateForm setShow={setShow} setEmail={props.setEmail} email={props.email} auth={props.auth}/> : 
         <CreateMsg setShow={setShow} setEmail={props.setEmail}/>}
     />
   )
@@ -25,10 +25,6 @@ function CreateMsg(props){
         props.setEmail('')
       }}>Log Out</button>
   </>)};
-
-function nav(){
-  window.location.href = "#/CreateAccount/";
-  };
 
 function ValidateEmail(email) 
 {
