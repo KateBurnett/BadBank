@@ -1,13 +1,23 @@
-//const MongoClient = require('mongodb');
-//.MongoClient;
-// const url = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
-let db = null;
+// -------------  Mongo connection in starter files -----------------------------
+const MongoClient = require('mongodb').MongoClient;
+const url         = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
+let db            = null;
+ 
+// connect to mongo
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
+    console.log("Connected successfully to db server");
 
-const { MongoClient } = require('mongodb');
-const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
+    // connect to myproject database
+    db = client.db('myproject');
+});
+
+// // ---------------  Mongo connection in Atlas - MongoDB Driver "Connect to BankingCluster" ----------
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
 
 // // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, { useUnifiedTopology: true }, {
+// const client = new MongoClient(uri, {
 //   serverApi: {
 //     version: ServerApiVersion.v1,
 //     strict: true,
@@ -30,37 +40,8 @@ const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://loc
 // run().catch(console.dir);
 
 
-// connect to mongo
-MongoClient.connect(uri, { useUnifiedTopology: true }, function (err, client) {
-    console.log("Connected successfully to db server");
 
-    // connect to myproject database
-    db = client.db('myproject');
-});
- 
-// async function run(){
-//     /**
-//      * Connection URI.
-//      */
-//     const uri = process.env.REACT_APP_MONGO_URI?process.env.MONGO_URI:'mongodb://localhost:27017';
- 
-//     const client = new MongoClient(uri);
- 
-//     try {
-//         // Connect to the MongoDB cluster
-//         await client.connect();
- 
-//         // Make the appropriate DB calls
-//         //await  listDatabases(client);
- 
-//     } catch (e) {
-//         console.error(e);
-//     }
-// }
-
-// run().catch(console.error);
-
-
+// -------------- rest of code to update database, do not change-------------------
 // create user account using the collection.insertOne function
 function create(name, email, password) {
     return new Promise ((resolve, reject) => {
