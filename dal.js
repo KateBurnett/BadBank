@@ -5,7 +5,7 @@
 // Err: "UnhandledPromiseRejectionWarning: ReferenceError: client is not defined" - replaced mongo def with w3 version
 // Err: "UnhandledPromiseRejectionWarning: MongoError: MongoClient must be connected before calling MongoClient.prototype.db"
 // Removed "db = client.db('myproject');" from db calls - errors stopped but still only works locally
-// Remove local host from uri: "TypeError: Cannot read property 'db' of undefined"
+// Removed local host from uri: "TypeError: Cannot read property 'db' of undefined"
 
 // const MongoClient = require('mongodb').MongoClient;
 // const url         = process.env.REACT_APP_MONGO_URI?process.env.REACT_APP_MONGO_URI:'mongodb://localhost:27017';
@@ -22,7 +22,7 @@ MongoClient.connect(uri, {useUnifiedTopology: true}, function(err, client) {
 
     // connect to myproject database
     db = client.db('myproject');
-    console.log(db);
+    //console.log(db);
 });
 
 // // ---------------  Mongo connection in Atlas - MongoDB Driver "Connect to BankingCluster" ----------

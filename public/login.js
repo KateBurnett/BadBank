@@ -1,10 +1,17 @@
 // working but rerenders the SPA when anything is entered in email input. Add new set state and set equal to props.setEmail?
+// changed onChange to onSubmit - Err: "Warning: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`."
+// Memoization enables your code to re-render components only if there’s a change in the props, which wouldn't help us here.
+// Assigned new variable to onChange then used it in the onClick fetch - solved rerender but now setShow doesn't work (doesn't show success msg)
+// Moved emailValue to parent, show still not working
 
 function Login(props){
 
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
   const [password, setPassword] = React.useState('');
+//  const [emailValue, setEmailValue]     = React.useState('');
+
+
 
   return (
     <Card
@@ -12,7 +19,10 @@ function Login(props){
       header="Login / Logout"
       status={status}
       body={show ? 
-        <LoginForm setShow={setShow} setStatus={setStatus} setEmail={props.setEmail} email={props.email} setPassword={setPassword} password={password} auth={props.auth}/> :
+        <LoginForm setShow={setShow} setStatus={setStatus} setEmail={props.setEmail} email={props.email} setPassword={setPassword} password={password} 
+        //emailValue={emailValue} setEmailValue={setEmailValue}
+        //auth={props.auth} GoogleOAuthProvider={props.GoogleOAuthProvider} Google={props.Google}
+        /> :
         <LoginMsg setShow={setShow} setStatus={setStatus} email={props.email} setEmail={props.setEmail}/>
       }
     />
@@ -20,6 +30,7 @@ function Login(props){
 }
 
 function LoginMsg(props){
+
   return(<>
     <h5>Success! Logged in as {props.email}</h5>
     <button type="submit" 
@@ -35,6 +46,28 @@ function LoginMsg(props){
 
 function LoginForm(props){
 
+  function handle(){
+    //props.setShow(false);
+    fetch(`/account/login/${props.email}/${props.password}`)
+    .then(response => response.text())
+    .then(text => {
+      const data = JSON.parse(text);
+      if(data._id){
+        props.setShow(false);
+        const data = JSON.parse(text);
+        props.setStatus('');
+        props.setEmail(data.email)
+        console.log('JSON:', data);
+        console.log('Email', data.email);
+      }else{
+        props.setStatus("User does not exist. Please create an account.")
+        console.log('err:', text);
+      }
+    })
+    ;
+  }
+
+// ----------------- Firebase OAuth --------------------------------------------
   // const firebaseConfig = {
   //   apiKey: "AIzaSyCKC0b-30an2MAuBmuJ4a0fzcVJB5E1-5s",
   //   authDomain: "kateburnett-bankingapp.firebaseapp.com",
@@ -50,25 +83,6 @@ function LoginForm(props){
 
   // // TODO: initialize provider for google auth
   // const provider = new GoogleAuthProvider();
-  
-
-  function handle(){
-    fetch(`/account/login/${props.email}/${props.password}`)
-    .then(response => response.text())
-    .then(text => {
-        try {
-            const data = JSON.parse(text);
-            props.setStatus('');
-            props.setShow(false);
-            props.setEmail(data.email)
-            console.log('JSON:', data);
-            console.log('Email', data.email);
-        } catch(err) {
-            props.setStatus("User does not exist. Please create an account.")
-            console.log('err:', text);
-        }
-    });
-  }
 
   // function googleLogin () {
   //   console.log("google sign in clicked");
@@ -95,7 +109,8 @@ function LoginForm(props){
       className="form-control" 
       placeholder="Enter email" 
       value={props.email} 
-      onChange={e => props.setEmail(e.currentTarget.value)}/><br/>
+      onChange={e => props.setEmail(e.currentTarget.value)}
+      /><br/>
 
     Password<br/>
     <input type="password" 
@@ -105,6 +120,9 @@ function LoginForm(props){
       onChange={e => props.setPassword(e.currentTarget.value)}/><br/>
 
     <button type="submit" className="btn btn-warning" onClick={handle}>Log in</button><br/>
-    {/* <button type="submit" className="btn btn-warning" onClick={googleLogin}>Log in with Google</button> */}
+
+    {/* <GoogleOAuthProvider clientId="48029543749-c7il3kljvfqltoae4as4apn3t5ebo4ij.apps.googleusercontent.com">
+        <Google />
+    </GoogleOAuthProvider> */}
   </>);
 }
